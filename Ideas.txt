@@ -1,0 +1,8 @@
+Q. 
+You are given a n x m grid of 0s and 1s. Your task is to answer the following queries of the form (i1, j1, i2, j2) such that you find out the maximum size of the square of 1s present inside the rectangle whose top-left vertex is (i1, j1) and bottom right vertex is (i2, j2). 
+
+Ans.
+  1. use dp[i][j] to calculate the size of the largest square of 1s ending at (i, j) => dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
+  2. then for each query... do the binary search for the answer in the range [1, min((i2 - i1), (j2 - j1)]... 
+  3. for a given x in the binary search... find the maximum in the range [i1 + x - 1, j1 + x - 1] -> [i2, j2].... if the maximum is greater than x then x is a solution..
+  4. the maximum in the range is calculated in O(1) time using 2D sparse table.
