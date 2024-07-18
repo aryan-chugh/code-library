@@ -6,3 +6,20 @@ Ans.
   2. then for each query... do the binary search for the answer in the range [1, min((i2 - i1), (j2 - j1)]... 
   3. for a given x in the binary search... find the maximum in the range [i1 + x - 1, j1 + x - 1] -> [i2, j2].... if the maximum is greater than x then x is a solution..
   4. the maximum in the range is calculated in O(1) time using 2D sparse table.
+
+Q. 
+The students (n <= 200) of a class are to divide themselves into groups of sizes 1 +. Each student has a working efficiency a[i] (<= 500). The imbalance of a group is defined as the max(a[i]) - min(a[i]) in the group. Find the number of groups the students can divide into such that the total imbalance is atmost k (<= 1000).
+
+Ans. 
+  1. the order doesn't matter, so sort the a[i] in non-decreasing or increasing order.
+  2. We start by adding the elements to different sets. 
+  3. Now, suppose that we are adding the ith element. Then we have j open sets, which means that they have some elements and more elements can still be added. (min is there but not max.)
+  4. Suppose there are j open sets, then when we add a[i] then the total imbalance increases by a[i] - a[i - 1] for each of the open sets. 
+     (Imagine when we close the open set on addition of a[i], then the imbalance of the set will be a[i] - a[i - 1] + a[i - 1] - a[i - 2] ...... a[start]).... which is the actual ans. for it.
+  5. dp[i][j][k] be denoting the number of ways to make partitions such that after considering the first i elements, we have j open sets and imbalance of k.
+  6. Now to the transitions : (val = dp[i - 1][j][k]) (new_imb = k + j.(a[i] - a[i - 1]))
+      a. we can add a[i] to any of the open groups and keep that group open. ::: dp[i][j][new_imb] += val * j;  // chose among the open sets in j ways.
+      b. we can add a[i] to any of the open groups and keep that group open ::: dp[i][j - 1][new_imb] += val * j; // chose among the open sets in j ways.
+      c. we can start a new open group with a[i] ::: dp[i][j + 1][new_imb] += val
+      d. we can start and stop a new group with a[i] ::: dp[i][j][new_imb] += val
+  7. Ans = dp[n][0][0] + dp[n][0][1] ... + dp[n][0][k]
