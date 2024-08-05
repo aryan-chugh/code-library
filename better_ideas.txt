@@ -1,3 +1,23 @@
 1. given an array check if we can partition it into two / more subarrays such that their XORs are equal.
 O(n) solution ::
   If the xor of the entire array is zero.. we can partition the array into a prefix and suffix xor's of which are equal and thus, we get a 2 partition of the array.
+  Otherwise when the xor of the entire array is not zero. We know, that if the partition exists then there are odd number of them...
+       so the XOR of each segment must equal to the XOR of the entire array.
+
+  In case we are additionally given the constraint to find if partition of size >= k exists.
+  Then, we are already done in case of odd partitions.
+
+
+  For even partitions what we can do is.. 
+      -- try for all the divisors of the array n.
+      -- check if the xor of the elements in the subarrays are equal or not.
+            -- prefix array of the entire array is calculated.
+            -- then we can loop over the k divisors in n / div[k] time each... (which evaluates to O(n logn) at the max).
+
+2. How to find the median without sorting the array.
+O(n.logn) :: 
+  Suppose x is less than the median of the array, then put 1 in the array at all places where a[i] > x and -1 in all other places.
+  Now if the sum of the entire array is positive then we for sure know that the median is greater than x.
+  Otherwise it is less than or equal to x.
+
+  We can therefore, binary search for the answer.
