@@ -1,0 +1,3 @@
+1. given an array check if we can partition it into two / more subarrays such that their XORs are equal.
+O(n) solution ::
+  If the xor of the entire array is zero.. we can partition the array into a prefix and suffix xor's of which are equal and thus, we get a 2 partition of the array.
