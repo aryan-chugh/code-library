@@ -1,0 +1,11 @@
+Learning 16/09/2024
+
+Moore's voting algorithm :
+  Find the majority element in an array in O(n)... majority element in an array is the element that occurs at least n / 2  + 1 times in the array.
+  --- loop through the array  (maintain a majority index and a count)
+      --- initialize the majority index to 0 and count to 1 initially.
+      --- if the current element is equal to the majority element then increase the count else decrease the count...
+      --- if the count goes to 0 on an element then change the majority index to the current index and set the count to 1.
+
+  --- finally, check if the frequency of the element at the majority index is greater than n / 2 by another iteration over the array.
+  --- if yes, then you have the majority element.
